@@ -1,1 +1,2 @@
-web: gunicorn myproject.wsgi
+web: gunicorn MiraAPI.wsgi --log-file -
+release: python manage.py migrate

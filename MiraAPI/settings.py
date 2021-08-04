@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'MiraAPI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR / "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,15 +80,8 @@ WSGI_APPLICATION = 'MiraAPI.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'miradb',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgres://vjhhzshhbfzrnz:6a2b8ae2902c8433066061a9fe236b346bc3d8d675adf63328fb4ab4a09d1cd1@ec2-54-225-228-142.compute-1.amazonaws.com:5432/dem4of0qq23hu7')
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -122,16 +117,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR, 'staticfiles'
 
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    BASE_DIR, 'static',
+    os.path.join(BASE_DIR, 'static'),
 )
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
