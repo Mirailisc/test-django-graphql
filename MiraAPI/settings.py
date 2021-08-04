@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'miradb',
         'USER': 'postgres',
-        'PASSWORD': 'PPn243561122',
+        'PASSWORD': '',
         'PORT': '5432',
     }
 }
